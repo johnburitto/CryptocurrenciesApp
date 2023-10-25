@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:UserInterface"
         xmlns:viewModel="clr-namespace:UserInterface.ViewModels"
         mc:Ignorable="d"
@@ -49,13 +50,43 @@
                 <RadioButton Content="Конвертація"
                              Height="50"
                              Foreground="White"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ConvertViewCommand}"/>
             </StackPanel>
             <Frame Grid.Column="1"
                    Grid.Row="1"
                    NavigationUIVisibility="Hidden"
                    Margin="10"
                    Content="{Binding CurrentView}"/>
+            <Border Height="30"
+                    CornerRadius="0, 20, 0, 0"
+                    Width="55"
+                    Grid.Column="1" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right"
+                    BorderThickness="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding ExitCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <TextBlock Text="X"
+                           Foreground="White" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Margin="0,0,5,0"/>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
         </Grid>
     </Border>
 </Window>

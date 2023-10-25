@@ -53,6 +53,11 @@
                     Height="200"
                     CornerRadius="10"
                     Margin="45, 0, 0, 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding ConvertViewCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 2">
                         <GradientStop Color="#ffc554" Offset="0.0"/>

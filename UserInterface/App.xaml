@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ScrollBarTheme.xaml" />
                 <ResourceDictionary Source="Themes/SearchBoxTheme.xaml" />
+                <ResourceDictionary Source="Themes/ComboBoxTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
@@ -20,6 +21,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:DetailInformationViewModel}">
                 <view:DetailInformationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ConvertViewModel}">
+                <view:ConvertView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

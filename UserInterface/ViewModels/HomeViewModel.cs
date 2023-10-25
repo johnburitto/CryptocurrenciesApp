@@ -7,7 +7,7 @@ using UserInterface.Core;
 
 namespace UserInterface.ViewModels
 {
-    public class HomeViewModel: ObservableObject
+    public class HomeViewModel : ObservableObject
     {
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.Instance;
 		private List<Asset>? _assets;
@@ -24,13 +24,16 @@ namespace UserInterface.ViewModels
 		public MainViewModel? MainViewModel { get; set; }
 		public SearchViewModel SearchViewModel { get; set; }
 		public DetailInformationViewModel? DetailInformationViewModel { get; set; }
+		public ConvertViewModel ConvertViewModel { get; set; }
 		public RelayCommand SearchViewCommand { get; set; }
 		public RelayCommand DetailInforationCommand { get; set; }
+		public RelayCommand ConvertViewCommand { get; set; }
 
         public HomeViewModel()
 		{
 			MainViewModel = MainViewModel.Instance;
 			SearchViewModel = new SearchViewModel();
+            ConvertViewModel = new ConvertViewModel();
 			SearchViewCommand = new RelayCommand(_ =>
 			{
 				MainViewModel!.CurrentView = SearchViewModel;
@@ -53,7 +56,14 @@ namespace UserInterface.ViewModels
 			{
 				return true;
 			});
-			Task.Factory.StartNew(async () =>
+            ConvertViewCommand = new RelayCommand(_ =>
+            {
+                MainViewModel!.CurrentView = ConvertViewModel;
+            }, _ =>
+            {
+                return true;
+            });
+            Task.Factory.StartNew(async () =>
 			{
 				while(true)
 				{	

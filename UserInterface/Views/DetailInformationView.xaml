@@ -126,7 +126,6 @@
                                Width="150"
                                VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding Asset.Explorer}"
-                               Foreground="White"
                                FontSize="18"
                                TextAlignment="Right"
                                Width="450" 
@@ -136,6 +135,17 @@
                                 <i:InvokeCommandAction Command="{Binding OpenExplorerCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property= "Foreground" Value="Blue"/>
+                                <Style.Triggers>
+                                    <Trigger Property ="IsMouseOver" Value="True">
+                                        <Setter Property= "Foreground" Value="Red"/>
+                                        <Setter Property= "TextDecorations" Value="Underline"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
                     </TextBlock>
                 </StackPanel>
             </StackPanel>
