@@ -25,13 +25,20 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-        <ListBox Background="Transparent"
+        <ListBox Name="List"
+                 Background="Transparent"
                  Foreground="White"
                  ItemsSource="{Binding Assets}"
                  BorderThickness="0"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
                  Height="391" Width="645">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding DetailInforationCommand}"
+                               CommandParameter="{Binding ElementName=List, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Width="600">

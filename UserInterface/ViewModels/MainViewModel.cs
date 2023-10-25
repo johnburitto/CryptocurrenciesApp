@@ -15,6 +15,7 @@ namespace UserInterface.ViewModels
                 OnPropertyChanged();
             }
         }
+        public static MainViewModel? Instance { get; set; }
         public HomeViewModel HomeViewModel { get; set; }
         public SearchViewModel SearchViewModel { get; set; }
         public RelayCommand HomeViewCommand { get; set; }
@@ -39,6 +40,7 @@ namespace UserInterface.ViewModels
             {
                 return true;
             });
+            Instance = this;
         }
     }
 }

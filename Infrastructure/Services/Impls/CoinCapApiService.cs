@@ -43,7 +43,7 @@ namespace Infrastructure.Services.Impls
 
         public async Task<CryptoResponse<List<Asset>>?> GetAssetsAsync(AssetQueryDto? dto)
         {
-            var response = await _client.GetAsync($"assets?{dto?.ToUrlQueryString()}");
+             var response = await _client.GetAsync($"assets?{dto?.ToUrlQueryString()}");
             var assets = await response.DeserializeObject<CryptoResponse<List<Asset>>>();
 
             return assets;

@@ -13,7 +13,9 @@
         public string? PriceUsd { get; set; }
         public string? ChangePercent24Hr { get; set; }
         public string? Vwap24Hr { get; set; }
+        public string? Explorer { get; set; }
 
-        public string? ImgPath => $"{Environment.CurrentDirectory}/Images/bitcoin.png";
+        public string? ImgPath => File.Exists($"{Environment.CurrentDirectory}/Images/{Id}.png") ? $"{Environment.CurrentDirectory}/Images/{Id}.png" 
+            : $"{Environment.CurrentDirectory}/Images/no-picture-taking.png";
     }
 }

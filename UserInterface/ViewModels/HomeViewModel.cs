@@ -9,8 +9,8 @@ namespace UserInterface.ViewModels
 {
     public class HomeViewModel: ObservableObject
     {
-		private List<Asset>? _assets;
 		private readonly UnitOfWork _unitOfWork = UnitOfWork.Instance;
+		private List<Asset>? _assets;
 
 		public List<Asset>? Assets
 		{
@@ -21,9 +21,38 @@ namespace UserInterface.ViewModels
 				OnPropertyChanged();
 			}
 		}
+		public MainViewModel? MainViewModel { get; set; }
+		public SearchViewModel SearchViewModel { get; set; }
+		public DetailInformationViewModel? DetailInformationViewModel { get; set; }
+		public RelayCommand SearchViewCommand { get; set; }
+		public RelayCommand DetailInforationCommand { get; set; }
 
-		public HomeViewModel()
+        public HomeViewModel()
 		{
+			MainViewModel = MainViewModel.Instance;
+			SearchViewModel = new SearchViewModel();
+			SearchViewCommand = new RelayCommand(_ =>
+			{
+				MainViewModel!.CurrentView = SearchViewModel;
+			}, _ =>
+			{
+				return true;
+			});
+			DetailInforationCommand = new RelayCommand(_ =>
+			{
+				var asset = _ as Asset;
+
+				if (asset == null)
+				{
+					return;
+				}
+
+				DetailInformationViewModel = DetailInformationViewModel.GetViewModel(asset?.Id);
+                MainViewModel!.CurrentView = DetailInformationViewModel;
+            }, _ =>
+			{
+				return true;
+			});
 			Task.Factory.StartNew(async () =>
 			{
 				while(true)
