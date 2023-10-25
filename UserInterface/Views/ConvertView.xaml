@@ -1,0 +1,80 @@
+﻿<Page x:Class="UserInterface.Views.ConvertView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:local="clr-namespace:UserInterface.Views"
+      xmlns:viewModel="clr-namespace:UserInterface.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ConvertView">
+
+    <Page.DataContext>
+        <viewModel:ConvertViewModel/>
+    </Page.DataContext>
+    <StackPanel Margin="0, 10, 0, 0" >
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <Image Source="{Binding SourceAsset.ImgPath}"
+                       Height="80"
+                       Width="80"
+                       Margin="0,0,0,10"/>
+                <ComboBox ItemsSource="{Binding Assets}"
+                          SelectedItem="{Binding SourceAsset}"
+                          DisplayMemberPath="Name"
+                          Width="200">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectAssetCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+            <Image Width="100"
+                   Height="100"
+                   Source="/Images/exchange-rate.png"
+                   Margin="70,10,70,10">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding ChangeAssetsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <StackPanel>
+                <Image Source="{Binding DestinationAsset.ImgPath}"
+                       Height="80"
+                       Width="80"
+                       Margin="0,0,0,10"/>
+                <ComboBox ItemsSource="{Binding Assets}"
+                          SelectedItem="{Binding DestinationAsset}"
+                          DisplayMemberPath="Name"
+                          Width="200">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectAssetCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+        <Grid Height="310">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="151*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="107*"/>
+                <RowDefinition Height="62*"/>
+                <RowDefinition Height="151*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding Converted}"
+                       Foreground="White"
+                       TextAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="1"
+                       FontSize="45"/>
+        </Grid>
+    </StackPanel>
+</Page>

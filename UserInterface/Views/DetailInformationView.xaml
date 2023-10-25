@@ -1,0 +1,154 @@
+﻿<Page x:Class="UserInterface.Views.DetailInformationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:local="clr-namespace:UserInterface.Views"
+      xmlns:viewModel="clr-namespace:UserInterface.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="DetailInformationView">
+    <Page.DataContext>
+        <viewModel:DetailInformationViewModel/>
+    </Page.DataContext>
+    <StackPanel>
+        <TextBlock Text="{Binding Asset.Name}"
+                   Foreground="White"
+                   FontSize="28"
+                   TextAlignment="Center" Margin="0,0,0,10"/>
+        <Image Source="{Binding Asset.ImgPath}"
+               Width="120"
+               Height="120"/>
+        <TextBlock Foreground="White"
+                   FontSize="18"
+                   TextAlignment="Center" 
+                   Margin="0,10,0,10"
+                   VerticalAlignment="Center">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} #{1}">
+                    <Binding Path="Asset.Symbol" />
+                    <Binding Path="Asset.Rank" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <StackPanel Height="300"
+                    Orientation="Horizontal">
+            <StackPanel Width="750">
+                <StackPanel Width="600"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 0, 0, 5">
+                    <TextBlock Text="Ціна"
+                               Foreground="White"
+                               FontSize="24"
+                               Width="70"/>
+                    <TextBlock Text="{Binding Asset.PriceUsd}"
+                               Foreground="White"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Width="550"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Width="600"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 0, 0, 5">
+                    <TextBlock Text="Кількість"
+                               Foreground="White"
+                               FontSize="24"
+                               Width="120"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Asset.Supply}"
+                               Foreground="White"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Width="480" 
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Width="600"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 0, 0, 5">
+                    <TextBlock Text="Максимальна кількість"
+                               Foreground="White"
+                               FontSize="24"
+                               Width="260"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Asset.MaxSupply}"
+                               Foreground="White"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Width="340" 
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Width="600"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 0, 0, 5">
+                    <TextBlock Text="Залишилося у $"
+                               Foreground="White"
+                               FontSize="24"
+                               Width="200"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Asset.MarketCapUsd}"
+                               Foreground="White"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Width="400" 
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Width="600"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0, 0, 0, 5">
+                    <TextBlock Text="Продано за 24 години"
+                               Foreground="White"
+                               FontSize="24"
+                               Width="270"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Asset.VolumeUsd24Hr}"
+                               Foreground="White"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Width="330" 
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Width="600"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="Детальніше"
+                               Foreground="White"
+                               FontSize="24"
+                               Width="150"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Asset.Explorer}"
+                               FontSize="18"
+                               TextAlignment="Right"
+                               Width="450" 
+                               VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding OpenExplorerCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property= "Foreground" Value="Blue"/>
+                                <Style.Triggers>
+                                    <Trigger Property ="IsMouseOver" Value="True">
+                                        <Setter Property= "Foreground" Value="Red"/>
+                                        <Setter Property= "TextDecorations" Value="Underline"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Page>
