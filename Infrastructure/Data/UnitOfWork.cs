@@ -7,10 +7,26 @@ namespace Infrastructure.Data
     public class UnitOfWork
     {
         public ICoinCapApiService CoinCapApiService { get; private set; }
-    
-        public UnitOfWork() 
+        private static UnitOfWork? _instance;
+        private static object _lock = new object();
+
+        public static UnitOfWork Instance => GetInstance();
+
+        private UnitOfWork() 
         {
             CoinCapApiService = new CoinCapApiService(RequestClient<ICoinCapApiService>.Client);
+        }
+        private static UnitOfWork GetInstance()
+        {
+            if (_instance == null)
+            {
+                lock (_lock)
+                {
+                    _instance = new UnitOfWork();
+                }
+            }
+
+            return _instance;
         }
     }
 }

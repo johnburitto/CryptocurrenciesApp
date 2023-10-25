@@ -4,9 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserInterface"
+        xmlns:viewModel="clr-namespace:UserInterface.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Border Background="#272537"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Text="Crypto👋🏻"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="20, 0, 0, 0"
+                       Foreground="White"
+                       FontSize="22"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Домашня сторінка"
+                             Height="50"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding HomeViewCommand}"/>
+                <RadioButton Content="Пошук"
+                             Height="50"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SearchViewCommand}"/>
+                <RadioButton Content="Конвертація"
+                             Height="50"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+            <Frame Grid.Column="1"
+                   Grid.Row="1"
+                   NavigationUIVisibility="Hidden"
+                   Margin="10"
+                   Content="{Binding CurrentView}"/>
+        </Grid>
+    </Border>
 </Window>

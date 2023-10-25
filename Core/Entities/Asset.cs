@@ -13,5 +13,7 @@
         public string? PriceUsd { get; set; }
         public string? ChangePercent24Hr { get; set; }
         public string? Vwap24Hr { get; set; }
+
+        public string? ImgPath => $"{Environment.CurrentDirectory}/Images/bitcoin.png";
     }
 }
